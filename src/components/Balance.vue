@@ -4,10 +4,10 @@
       <h4 class="uppercase text-sm">Your Balance</h4>
       <p class="font-semibold text-2xl">
         D{{
-          transactions.reduce(
+         Intl.NumberFormat().format( transactions.reduce(
             (acc, currValue) => acc + Number(currValue.amount),
             0
-          )
+          ))
         }}
       </p>
     </div>

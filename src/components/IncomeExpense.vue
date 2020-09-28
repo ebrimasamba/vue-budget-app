@@ -8,10 +8,13 @@
           <h5 class="uppercase font-bold tracking-widest">Income</h5>
           <span class="text font-bold text-lg md:text-xl">
             D{{
-              Math.abs(
-                transactions
-                  .filter((value) => value.amount > 0)
-                  .reduce((acc, currValue) => acc + Number(currValue.amount), 0)
+              Intl.NumberFormat().format(
+                Math.abs(
+                  newIncome.reduce(
+                    (acc, currValue) => acc + Number(currValue.amount),
+                    0
+                  )
+                )
               )
             }}
           </span>
@@ -27,10 +30,12 @@
           <h5 class="uppercase font-bold tracking-widest">Expenses</h5>
           <span class="tex font-bold text-lg md:text-xl">
             -D{{
-              Math.abs(
-                expenses.reduce(
-                  (acc, currValue) => acc + Number(currValue.amount),
-                  0
+              Intl.NumberFormat().format(
+                Math.abs(
+                  newExpenses.reduce(
+                    (acc, currValue) => acc + Number(currValue.amount),
+                    0
+                  )
                 )
               )
             }}
@@ -48,18 +53,15 @@
 export default {
   name: "IncomeExpense",
   props: { transactions: Array },
-  data() {
-    return {
-      income: [],
-      expenses: [],
-    };
-  },
-  mounted() {
-    this.expenses = this.transactions.filter((value) => value.amount < 0);
-    this.income = this.transactions.filter((value) => value.amount >= 0);
+  computed: {
+    newIncome() {
+      return this.transactions.filter((value) => value.amount >= 0);
+    },
+    newExpenses() {
+      return this.transactions.filter((value) => value.amount < 0);
+    },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

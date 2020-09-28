@@ -1,6 +1,6 @@
 <template>
   <div class="mt-5">
-    <h3 class="font-semibold border-b pb-1 text-lg">Items</h3>
+    <h3 class="font-semibold border-b pb-1 text-lg">Transactions</h3>
     <div class="text-black" v-if="transactions.length > 0">
       <div v-bind:key="trans.id" v-for="(trans, id) in transactions">
         <Transaction

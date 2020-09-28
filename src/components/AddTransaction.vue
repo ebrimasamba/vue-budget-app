@@ -23,6 +23,7 @@
             placeholder="negative-expense positive-income"
             id="amount"
             v-model="amount"
+            va
           />
         </div>
         <button
@@ -45,17 +46,24 @@ export default {
   data() {
     return {
       name: "",
-      amount: 0,
+      amount: null,
     };
   },
   methods: {
     addTransaction: function (e) {
       e.preventDefault();
+      if (this.name == "") {
+        alert("Name of transaction cannot be empty");
+        return;
+      }
+      if (this.amount == null || this.amount == 0) {
+        alert("Name of transaction cannot be null or zero");
+        return;
+      }
       let newTransaction = { name: this.name, amount: Number(this.amount) };
       this.transactions.push(newTransaction);
-      console.log(this.transactions);
       this.name = "";
-      this.amount = 0;
+      this.amount = null;
     },
   },
 };

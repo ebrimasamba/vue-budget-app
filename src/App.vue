@@ -21,12 +21,24 @@ export default {
   components: { Balance, IncomeExpense, TransactionList, AddTransaction },
   data() {
     return {
-      transactions: [
-        { name: "bread", amount: 2000 },
-        { name: "Television", amount: -2000 },
-        { name: "Allowance", amount: 2000 },
-      ],
+      transactions: [],
     };
+  },
+  mounted() {
+    if (JSON.parse(localStorage.getItem("transactions"))) {
+      console.log("storage present");
+      this.transactions = JSON.parse(localStorage.getItem("transactions"));
+    } else {
+      console.log("no storage present");
+      localStorage.setItem("transactions", JSON.stringify(this.transactions));
+    }
+  },
+  watch: {
+    transactions(newTransaction) {
+      if (newTransaction) {
+        localStorage.setItem("transactions", JSON.stringify(this.transactions));
+      }
+    },
   },
 };
 </script>
@@ -37,7 +49,6 @@ html {
 }
 * {
   font-family: rubik, poppins, ubuntu, nunito, helvetica;
-  /* outline: none; */
 }
 
 input:focus,
@@ -45,9 +56,6 @@ button:focus {
   outline: none !important;
   box-shadow: none !important;
 }
-/* .text-7xl {
-  font-size: 5.5rem;
-} */
 
 .bg-teal-gradient {
   background-image: linear-gradient(to left, #41b984, #2c8b62);
@@ -113,9 +121,4 @@ button:focus {
     width: 100%;
   }
 }
-/* .max-h-200 {
-  max-height: 200px;
-  overflow-y: auto;
-  overflow-x: visible;
-} */
 </style>

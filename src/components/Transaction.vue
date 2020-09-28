@@ -36,8 +36,7 @@ export default {
   },
   methods: {
     deleteTransaction: function (id) {
-      // console.log(id);
-      this.transactions.splice(0, id);
+      this.transactions.splice(id, 1);
     },
   },
 };
